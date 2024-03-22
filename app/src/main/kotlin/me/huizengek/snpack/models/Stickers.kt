@@ -43,7 +43,6 @@ data class Sticker(
     val id: Long = 0,
     val packId: Long,
     val imageFileName: String,
-    val emojis: List<String>,
     val size: Long
 )
 

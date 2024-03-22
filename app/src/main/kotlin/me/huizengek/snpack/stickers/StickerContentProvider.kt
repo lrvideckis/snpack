@@ -146,9 +146,9 @@ class StickerContentProvider : ContentProvider() {
 
     @JvmName("stickersToCursor")
     private fun List<Sticker>.toCursor(uri: Uri): Cursor {
-        val matrix = MatrixCursor(arrayOf("sticker_file_name", "sticker_emoji"))
+        val matrix = MatrixCursor(arrayOf("sticker_file_name"))
         forEach {
-            matrix.addRow(arrayOf(it.imageFileName, it.emojis.joinToString(separator = ",")))
+            matrix.addRow(arrayOf(it.imageFileName))
         }
         matrix.setNotificationUri(context!!.contentResolver, uri)
         return matrix
