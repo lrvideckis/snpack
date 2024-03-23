@@ -35,7 +35,7 @@ data class SharedPreferencesProperty<T : Any> internal constructor(
     private val default: T
 ) : ReadWriteProperty<PreferencesHolder, T> {
     private val state = mutableStateOf(default)
-    val stateFlow = MutableStateFlow(default)
+    private val stateFlow = MutableStateFlow(default)
     private var listener: OnSharedPreferenceChangeListener? = null
 
     private fun setState(newValue: T) {

@@ -16,7 +16,7 @@ val Int.px get() = Px(this)
 
 @JvmInline
 value class Px(val value: Int) {
-    fun toDp(density: Density) = with(density) { value.toDp() }
+    private fun toDp(density: Density) = with(density) { value.toDp() }
 
     @Composable
     fun toDp() = toDp(LocalDensity.current)
