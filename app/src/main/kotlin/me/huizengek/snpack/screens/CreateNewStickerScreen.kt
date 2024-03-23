@@ -71,9 +71,7 @@ import me.huizengek.snpack.destinations.StickerScreenDestination
 import me.huizengek.snpack.stickers.StickerRepository
 import me.huizengek.snpack.stickers.toSticker
 import me.huizengek.snpack.ui.components.ColorSelector
-import me.huizengek.snpack.ui.components.EmojiDisplay
 import me.huizengek.snpack.ui.components.NavigationAwareBack
-import me.huizengek.snpack.ui.components.StickerEmojiPicker
 import me.huizengek.snpack.ui.components.StickerPreview
 import me.huizengek.snpack.ui.components.TopAppBarTitle
 import me.huizengek.snpack.util.px
@@ -99,9 +97,6 @@ fun CreateNewStickerScreen(packId: Long) {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
-    val emojis = remember { mutableStateMapOf<Int, String>() }
-    var idx by rememberSaveable { mutableIntStateOf(0) }
-
     var text by rememberSaveable { mutableStateOf("") }
     var size by rememberSaveable { mutableFloatStateOf(24f) }
     var stroke by rememberSaveable { mutableFloatStateOf(8f) }
@@ -122,7 +117,6 @@ fun CreateNewStickerScreen(packId: Long) {
             snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
         ) { paddingValues ->
             val scrollState = rememberScrollState()
-            var pastEmojiHeightPx by remember { mutableFloatStateOf(0f) }
 
             Column(
                 modifier = Modifier
@@ -237,23 +231,12 @@ fun CreateNewStickerScreen(packId: Long) {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                EmojiDisplay(
-                    index = idx,
-                    setIndex = { idx = it },
-                    emojis = emojis,
-                    modifier = Modifier.onGloballyPositioned {
-                        pastEmojiHeightPx = it.positionInParent().y + it.size.height
-                    }
-                )
-
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Button(
                     onClick = {
                         coroutineScope.launch {
-                            val actualEmojis = emojis.values.toList()
+                            val actualEmojis = listOf("😀")
                             if (actualEmojis.firstOrNull().isNullOrBlank())
                                 return@launch snackbarHostState
                                     .showSnackbar(context.getString(R.string.error_sticker_no_emojis))
@@ -290,27 +273,6 @@ fun CreateNewStickerScreen(packId: Long) {
                     Icon(imageVector = Icons.Filled.Check, contentDescription = null)
                     Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
                     Text(text = stringResource(R.string.save))
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                StickerEmojiPicker(onPicked = {
-                    emojis[idx] = it
-                    idx = (idx + 1) % 3
-                })
-            }
-
-            AnimatedVisibility(
-                visible = scrollState.value > pastEmojiHeightPx,
-                enter = slideInVertically(),
-                exit = fadeOut() + slideOutVertically()
-            ) {
-                Box(
-                    modifier = Modifier
-                        .padding(paddingValues)
-                        .padding(top = 8.dp)
-                ) {
-                    EmojiDisplay(index = idx, setIndex = { idx = it }, emojis = emojis)
                 }
             }
         }
