@@ -115,7 +115,9 @@ object StickerRepository {
     suspend fun insertSticker(
         pack: StickerPack,
         image: Bitmap,
+        emojis: List<String>
     ): Sticker? = withContext(Dispatchers.IO) {
+        require(emojis.size in (1..3)) { "You need 1 to 3 (inclusive) emojis for the sticker" }
 
         val fileName = "${randomString()}.webp"
         val imageFile = filesDir.resolve(STICKERS_FOLDER).resolve(fileName)
@@ -128,6 +130,7 @@ object StickerRepository {
             val sticker = Sticker(
                 packId = pack.id,
                 imageFileName = fileName,
+                emojis = emojis,
                 size = imageFile.length()
             )
 

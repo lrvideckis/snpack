@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a2c992d09a27f751a3cbd1164ea716e8",
+    "identityHash": "e9e8326fd6bb7aca1180b5b038c0e9b5",
     "entities": [
       {
         "tableName": "StickerPack",
@@ -98,7 +98,7 @@
       },
       {
         "tableName": "Sticker",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `packId` INTEGER NOT NULL, `imageFileName` TEXT NOT NULL, `size` INTEGER NOT NULL, FOREIGN KEY(`packId`) REFERENCES `StickerPack`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `packId` INTEGER NOT NULL, `imageFileName` TEXT NOT NULL, `emojis` TEXT NOT NULL, `size` INTEGER NOT NULL, FOREIGN KEY(`packId`) REFERENCES `StickerPack`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -115,6 +115,12 @@
           {
             "fieldPath": "imageFileName",
             "columnName": "imageFileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "emojis",
+            "columnName": "emojis",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -160,7 +166,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a2c992d09a27f751a3cbd1164ea716e8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e9e8326fd6bb7aca1180b5b038c0e9b5')"
     ]
   }
 }
