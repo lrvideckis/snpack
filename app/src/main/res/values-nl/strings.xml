@@ -53,4 +53,17 @@
     <string name="dynamic_theme">Dynamisch thema</string>
     <string name="dynamic_theme_description">Maakt het thema van de app dynamisch a.d.h.v. je achtergrond. Vereist Android 12 of hoger.</string>
     <string name="add_to_title">Toevoegen aan…</string>
+
+    <string name="happy">Blij</string>
+    <string name="love">Liefde</string>
+    <string name="sad">Verdrietig</string>
+    <string name="angry">Boos</string>
+    <string name="party">Feest</string>
+
+    <string name="backup_restored">Back-up van %1$s hersteld.</string>
+    <string name="backup">Back-up</string>
+    <string name="backup_create">Maak back-up</string>
+    <string name="backup_create_description">Kies een map en sla je back-up op je telefoon op.</string>
+    <string name="backup_restore">Herstel back-up</string>
+    <string name="backup_restore_description">Herstel je back-up vanaf je telefoon en voeg alle stickers toe aan je gallerij.</string>
 </resources>
