@@ -54,12 +54,6 @@
     <string name="dynamic_theme_description">Uses a dynamic app theme based on your background. Requires Android 12 or later.</string>
     <string name="add_to_title">Add to…</string>
 
-    <string name="happy">Happy</string>
-    <string name="love">Love</string>
-    <string name="sad">Sad</string>
-    <string name="angry">Angry</string>
-    <string name="party">Party</string>
-
     <string name="backup_restored">Backup by %1$s restored.</string>
     <string name="backup">Backup</string>
     <string name="backup_create">Create backup</string>
